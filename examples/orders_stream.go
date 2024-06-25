@@ -9,9 +9,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/tinkoff/invest-api-go-sdk/investgo"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"github.com/ai-zelenin/invest-api-go-sdk/investgo"
 )
 
 func main() {

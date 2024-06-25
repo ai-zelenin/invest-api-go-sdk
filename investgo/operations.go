@@ -4,9 +4,10 @@ import (
 	"context"
 	"time"
 
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+
+	pb "github.com/ai-zelenin/invest-api-go-sdk/proto"
 )
 
 type OperationsServiceClient struct {

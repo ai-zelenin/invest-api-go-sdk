@@ -10,11 +10,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/tinkoff/invest-api-go-sdk/examples/ob_bot/internal/bot"
-	"github.com/tinkoff/invest-api-go-sdk/investgo"
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"github.com/ai-zelenin/invest-api-go-sdk/examples/ob_bot/internal/bot"
+	"github.com/ai-zelenin/invest-api-go-sdk/investgo"
+	pb "github.com/ai-zelenin/invest-api-go-sdk/proto"
 )
 
 const (

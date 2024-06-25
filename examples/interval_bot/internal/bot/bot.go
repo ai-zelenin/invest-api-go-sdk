@@ -11,8 +11,9 @@ import (
 	"time"
 
 	"github.com/montanaflynn/stats"
-	"github.com/tinkoff/invest-api-go-sdk/investgo"
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
+
+	"github.com/ai-zelenin/invest-api-go-sdk/investgo"
+	pb "github.com/ai-zelenin/invest-api-go-sdk/proto"
 )
 
 // IntervalStrategyConfig - Конфигурация стратегии интервального бота

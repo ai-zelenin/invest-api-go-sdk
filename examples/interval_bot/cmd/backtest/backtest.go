@@ -15,11 +15,12 @@ import (
 
 	"github.com/schollz/progressbar/v3"
 	"github.com/sourcegraph/conc/pool"
-	"github.com/tinkoff/invest-api-go-sdk/examples/interval_bot/internal/bot"
-	"github.com/tinkoff/invest-api-go-sdk/investgo"
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"github.com/ai-zelenin/invest-api-go-sdk/examples/interval_bot/internal/bot"
+	"github.com/ai-zelenin/invest-api-go-sdk/investgo"
+	pb "github.com/ai-zelenin/invest-api-go-sdk/proto"
 )
 
 // DISABLE_INFO_LOGS - Отключение подробных сообщений о сделках по инструментам

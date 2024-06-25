@@ -6,14 +6,15 @@ import (
 	"fmt"
 	"time"
 
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
-	"github.com/tinkoff/invest-api-go-sdk/retry"
 	"golang.org/x/oauth2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/metadata"
+
+	pb "github.com/ai-zelenin/invest-api-go-sdk/proto"
+	"github.com/ai-zelenin/invest-api-go-sdk/retry"
 )
 
 const (

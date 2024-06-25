@@ -5,8 +5,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
-	"github.com/tinkoff/invest-api-go-sdk/retry"
+	pb "github.com/ai-zelenin/invest-api-go-sdk/proto"
+	"github.com/ai-zelenin/invest-api-go-sdk/retry"
 )
 
 type MarketDataStreamClient struct {
