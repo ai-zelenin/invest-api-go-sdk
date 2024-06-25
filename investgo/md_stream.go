@@ -3,9 +3,10 @@ package investgo
 import (
 	"context"
 
-	pb "github.com/tinkoff/invest-api-go-sdk/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	pb "github.com/tinkoff/invest-api-go-sdk/proto"
 )
 
 // Deprecated: Use MarketDataStream
@@ -21,11 +22,11 @@ type MarketDataStream struct {
 	ctx    context.Context
 	cancel context.CancelFunc
 
-	candle        chan *pb.Candle
-	trade         chan *pb.Trade
-	orderBook     chan *pb.OrderBook
-	lastPrice     chan *pb.LastPrice
-	tradingStatus chan *pb.TradingStatus
+	Candle        chan *pb.Candle
+	Trade         chan *pb.Trade
+	OrderBook     chan *pb.OrderBook
+	LastPrice     chan *pb.LastPrice
+	TradingStatus chan *pb.TradingStatus
 
 	subs subscriptions
 }
@@ -52,7 +53,7 @@ func (mds *MarketDataStream) SubscribeCandle(ids []string, interval pb.Subscript
 	for _, id := range ids {
 		mds.subs.candles[id] = candleSub{interval: interval, waitingClose: waitingClose}
 	}
-	return mds.candle, nil
+	return mds.Candle, nil
 }
 
 // UnSubscribeCandle - Метод отписки от свечей
@@ -94,7 +95,7 @@ func (mds *MarketDataStream) SubscribeOrderBook(ids []string, depth int32) (<-ch
 	for _, id := range ids {
 		mds.subs.orderBooks[id] = depth
 	}
-	return mds.orderBook, nil
+	return mds.OrderBook, nil
 }
 
 // UnSubscribeOrderBook - метод отдписки от стаканов инструментов
@@ -134,7 +135,7 @@ func (mds *MarketDataStream) SubscribeTrade(ids []string) (<-chan *pb.Trade, err
 	for _, id := range ids {
 		mds.subs.trades[id] = struct{}{}
 	}
-	return mds.trade, nil
+	return mds.Trade, nil
 }
 
 // UnSubscribeTrade - метод отписки от ленты обезличенных сделок
@@ -173,7 +174,7 @@ func (mds *MarketDataStream) SubscribeInfo(ids []string) (<-chan *pb.TradingStat
 	for _, id := range ids {
 		mds.subs.tradingStatuses[id] = struct{}{}
 	}
-	return mds.tradingStatus, nil
+	return mds.TradingStatus, nil
 }
 
 // UnSubscribeInfo - метод отписки от торговых статусов инструментов
@@ -212,7 +213,7 @@ func (mds *MarketDataStream) SubscribeLastPrice(ids []string) (<-chan *pb.LastPr
 	for _, id := range ids {
 		mds.subs.lastPrices[id] = struct{}{}
 	}
-	return mds.lastPrice, nil
+	return mds.LastPrice, nil
 }
 
 // UnSubscribeLastPrice - метод отписки от последних цен инструментов
@@ -279,15 +280,15 @@ func (mds *MarketDataStream) Listen() error {
 func (mds *MarketDataStream) sendRespToChannel(resp *pb.MarketDataResponse) {
 	switch resp.GetPayload().(type) {
 	case *pb.MarketDataResponse_Candle:
-		mds.candle <- resp.GetCandle()
+		mds.Candle <- resp.GetCandle()
 	case *pb.MarketDataResponse_Orderbook:
-		mds.orderBook <- resp.GetOrderbook()
+		mds.OrderBook <- resp.GetOrderbook()
 	case *pb.MarketDataResponse_Trade:
-		mds.trade <- resp.GetTrade()
+		mds.Trade <- resp.GetTrade()
 	case *pb.MarketDataResponse_LastPrice:
-		mds.lastPrice <- resp.GetLastPrice()
+		mds.LastPrice <- resp.GetLastPrice()
 	case *pb.MarketDataResponse_TradingStatus:
-		mds.tradingStatus <- resp.GetTradingStatus()
+		mds.TradingStatus <- resp.GetTradingStatus()
 	default:
 		mds.mdsClient.logger.Infof("info from MD stream %v", resp.String())
 	}
@@ -295,11 +296,11 @@ func (mds *MarketDataStream) sendRespToChannel(resp *pb.MarketDataResponse) {
 
 func (mds *MarketDataStream) shutdown() {
 	mds.mdsClient.logger.Infof("close market data stream")
-	close(mds.candle)
-	close(mds.trade)
-	close(mds.lastPrice)
-	close(mds.orderBook)
-	close(mds.tradingStatus)
+	close(mds.Candle)
+	close(mds.Trade)
+	close(mds.LastPrice)
+	close(mds.OrderBook)
+	close(mds.TradingStatus)
 }
 
 // Stop - Завершение работы стрима
